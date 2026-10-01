@@ -20,7 +20,7 @@ const IconLogo = () => (
           d="M45 33 L45 49 C45 56 42 58 38 58 C34 58 32 56 31 53"
           fill="none"
           stroke="currentColor"
-          strokeWidth="9"
+          strokeWidth="7"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
