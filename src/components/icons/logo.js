@@ -17,10 +17,10 @@ const IconLogo = () => (
 
         {/* The letter J, drawn as a stroked path */}
         <path
-          d="M47 29 L47 50 C47 59 43 63 37 63 C32 63 29 60 28 56"
+          d="M45 33 L45 49 C45 56 42 58 38 58 C34 58 32 56 31 53"
           fill="none"
           stroke="currentColor"
-          strokeWidth="6"
+          strokeWidth="9"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
