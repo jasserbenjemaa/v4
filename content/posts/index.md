@@ -1,7 +1,7 @@
 ---
 title: 'What Coding Has Taught Me About Building Things'
 description: 'Small habits that made me a better engineer: read more than you write, ship early, and build for real people.'
-slug: '/pensieve/what-coding-taught-me'
+slug: '/blog/what-coding-taught-me'
 date: '2026-10-05'
 tags: ['Coding', 'Lessons', 'Career']
 draft: false

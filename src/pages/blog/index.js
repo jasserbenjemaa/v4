@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { graphql, Link } from 'gatsby';
 import kebabCase from 'lodash/kebabCase';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
+import { srConfig } from '@config';
+import sr from '@utils/sr';
 import { Layout } from '@components';
 import { IconBookmark } from '@components/icons';
+import { usePrefersReducedMotion } from '@hooks';
 
 const StyledMainContainer = styled.main`
   & > header {
@@ -142,21 +145,30 @@ const StyledPost = styled.li`
   }
 `;
 
-const PensievePage = ({ location, data }) => {
+const BlogPage = ({ location, data }) => {
   const posts = data.allMarkdownRemark.edges;
+  const revealTitle = useRef(null);
+  const revealPosts = useRef([]);
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      return;
+    }
+
+    // Title fades up first, then each card follows in turn
+    sr.reveal(revealTitle.current, srConfig());
+    revealPosts.current.forEach((ref, i) => sr.reveal(ref, srConfig(i * 100)));
+  }, []);
 
   return (
     <Layout location={location}>
-      <Helmet title="Pensieve" />
+      <Helmet title="Blog" />
 
       <StyledMainContainer>
-        <header>
-          <h1 className="big-heading">Pensieve</h1>
-          <p className="subtitle">
-            <a href="https://www.wizardingworld.com/writing-by-jk-rowling/pensieve">
-              a collection of memories
-            </a>
-          </p>
+        <header ref={revealTitle}>
+          <h1 className="big-heading">Blog</h1>
+          <p className="subtitle">A collection of blogs</p>
         </header>
 
         <StyledGrid>
@@ -167,7 +179,7 @@ const PensievePage = ({ location, data }) => {
               const formattedDate = new Date(date).toLocaleDateString();
 
               return (
-                <StyledPost key={i}>
+                <StyledPost key={i} ref={el => (revealPosts.current[i] = el)}>
                   <div className="post__inner">
                     <header>
                       <div className="post__icon">
@@ -184,7 +196,7 @@ const PensievePage = ({ location, data }) => {
                       <ul className="post__tags">
                         {tags.map((tag, i) => (
                           <li key={i}>
-                            <Link to={`/pensieve/tags/${kebabCase(tag)}/`} className="inline-link">
+                            <Link to={`/blog/tags/${kebabCase(tag)}/`} className="inline-link">
                               #{tag}
                             </Link>
                           </li>
@@ -201,17 +213,20 @@ const PensievePage = ({ location, data }) => {
   );
 };
 
-PensievePage.propTypes = {
+BlogPage.propTypes = {
   location: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
 };
 
-export default PensievePage;
+export default BlogPage;
 
 export const pageQuery = graphql`
   {
     allMarkdownRemark(
-      filter: { fileAbsolutePath: { regex: "/content/posts/" }, frontmatter: { draft: { ne: true } } }
+      filter: {
+        fileAbsolutePath: { regex: "/content/posts/" }
+        frontmatter: { draft: { ne: true } }
+      }
       sort: { fields: [frontmatter___date], order: DESC }
     ) {
       edges {

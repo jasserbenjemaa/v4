@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
 import { navDelay, loaderDelay } from '@utils';
+import { Link } from 'gatsby';
 import { usePrefersReducedMotion } from '@hooks';
 
 const StyledHeroSection = styled.section`
@@ -76,13 +77,9 @@ const Hero = () => {
     </>
   );
   const five = (
-    <a
-      className="email-link"
-      href="https://substack.com/@jasserbenjomaa"
-      target="_blank"
-      rel="noreferrer">
+    <Link className="email-link" to="/blog">
       Check out my blog!
-    </a>
+    </Link>
   );
 
   const items = [one, two, three, four, five];

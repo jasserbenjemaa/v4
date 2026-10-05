@@ -5,9 +5,9 @@ module.exports = {
     title: 'Jasser Ben Jemaa',
     description:
       'Jasser Ben Jemaa is a software engineer who specializes in building (and occasionally designing) exceptional digital experiences.',
-    siteUrl: 'https://v4-sandy.vercel.app', // No trailing slash allowed!
-    image: '/og.png', // Path to your image you placed in the 'static' folder
-    twitterUsername: '@bchiang7',
+    siteUrl: 'https://jasserbenjemaa-projects.vercel.app/', // No trailing slash allowed!
+    image: '/me.jpg', // Path to your image you placed in the 'static' folder
+    twitterUsername: '',
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

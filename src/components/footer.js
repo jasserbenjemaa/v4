@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import styled from 'styled-components';
 import { Icon } from '@components/icons';
 import { socialMedia } from '@config';
+
+const GITHUB_USER = 'jasserbenjemaa';
+const CATCHPHRASE = 'Make it work. Make it right. Make it accessible.';
 
 const StyledFooter = styled.footer`
   ${({ theme }) => theme.mixins.flexCenter};
@@ -50,50 +52,19 @@ const StyledCredit = styled.div`
     padding: 10px;
   }
 
-  .github-stats {
-    margin-top: 10px;
-
-    & > span {
-      display: inline-flex;
-      align-items: center;
-      margin: 0 7px;
-    }
-    svg {
-      display: inline-block;
-      margin-right: 5px;
-      width: 14px;
-      height: 14px;
-    }
+  .catchphrase {
+    margin-bottom: 10px;
+    color: var(--green);
+    font-size: var(--fz-xs);
+    line-height: 1.5;
   }
 `;
 
-const Footer = () => {
-  const [githubInfo, setGitHubInfo] = useState({
-    stars: null,
-    forks: null,
-  });
-
-  useEffect(() => {
-    if (process.env.NODE_ENV !== 'production') {
-      return;
-    }
-    fetch('https://api.github.com/repos/bchiang7/v4')
-      .then(response => response.json())
-      .then(json => {
-        const { stargazers_count, forks_count } = json;
-        setGitHubInfo({
-          stars: stargazers_count,
-          forks: forks_count,
-        });
-      })
-      .catch(e => console.error(e));
-  }, []);
-
-  return (
-    <StyledFooter>
-      <StyledSocialLinks>
-        <ul>
-          {socialMedia &&
+const Footer = () => (
+  <StyledFooter>
+    <StyledSocialLinks>
+      <ul>
+        {socialMedia &&
             socialMedia.map(({ name, url }, i) => (
               <li key={i}>
                 <a href={url} aria-label={name}>
@@ -101,33 +72,14 @@ const Footer = () => {
                 </a>
               </li>
             ))}
-        </ul>
-      </StyledSocialLinks>
+      </ul>
+    </StyledSocialLinks>
 
-      <StyledCredit tabindex="-1">
-        <a href="brittanychiang.com">
-          <div>Designed &amp; Built by Brittany Chiang</div>
-
-          {githubInfo.stars && githubInfo.forks && (
-            <div className="github-stats">
-              <span>
-                <Icon name="Star" />
-                <span>{githubInfo.stars.toLocaleString()}</span>
-              </span>
-              <span>
-                <Icon name="Fork" />
-                <span>{githubInfo.forks.toLocaleString()}</span>
-              </span>
-            </div>
-          )}
-        </a>
-      </StyledCredit>
-    </StyledFooter>
-  );
-};
-
-Footer.propTypes = {
-  githubInfo: PropTypes.object,
-};
+    <StyledCredit>
+      <p className="catchphrase">{CATCHPHRASE}</p>
+      <a href={`https://github.com/${GITHUB_USER}`}>Visit my GitHub</a>
+    </StyledCredit>
+  </StyledFooter>
+);
 
 export default Footer;
