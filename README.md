@@ -1,39 +1,14 @@
-<div align="center">
-  <img alt="Logo" src="https://raw.githubusercontent.com/bchiang7/v4/main/src/images/logo.png" width="100" />
-</div>
-<h1 align="center">
-  brittanychiang.com - v4
-</h1>
-<p align="center">
-  The fourth iteration of <a href="https://brittanychiang.com" target="_blank">brittanychiang.com</a> built with <a href="https://www.gatsbyjs.org/" target="_blank">Gatsby</a> and hosted with <a href="https://www.netlify.com/" target="_blank">Netlify</a>
-</p>
-<p align="center">
-  Previous iterations:
-  <a href="https://github.com/bchiang7/v1" target="_blank">v1</a>,
-  <a href="https://github.com/bchiang7/v2" target="_blank">v2</a>,
-  <a href="https://github.com/bchiang7/bchiang7.github.io" target="_blank">v3</a>
-</p>
-<p align="center">
-  <a href="https://app.netlify.com/sites/brittanychiang/deploys" target="_blank">
-    <img src="https://api.netlify.com/api/v1/badges/1963b488-7b78-48c9-9e2d-6fb5e47ab3af/deploy-status" alt="Netlify Status" />
-  </a>
-</p>
+# Jasser Ben Jemaa - Portfolio
 
-![demo](https://raw.githubusercontent.com/bchiang7/v4/main/src/images/demo.png)
+My personal portfolio and blog, built with [Gatsby](https://www.gatsbyjs.org/) and hosted on [Vercel](https://jasserbenjemaa-projects.vercel.app/).
 
-## 🚨 Forking this repo (please read!)
+## Credits
 
-Many people have contacted me asking me if they can use this code for their own website, and the answer to that question is usually **yes, with attribution**.
+This site is a fork of [brittanychiang.com (v4)](https://github.com/bchiang7/v4) by [Brittany Chiang](https://brittanychiang.com). The original design and code are hers. I customized the content and added my own changes, including a blog with previous and next post navigation.
 
-I value keeping my site open source, but as you all know, _**plagiarism is bad**_. It's always disheartening whenever I find that someone has copied my site without giving me credit. I spent a non-trivial amount of effort building and designing this iteration of my website, and I am proud of it! All I ask of you all is to not claim this effort as your own.
+Thank you, Brittany, for keeping your site open source. If you want to use her work for your own site, please give her proper credit by linking back to [brittanychiang.com](https://brittanychiang.com).
 
-Please also note that I did not build this site with the intention of it being a starter theme, so if you have questions about implementation, please refer to the [Gatsby docs](https://www.gatsbyjs.org/docs/).
-
-### TL;DR
-
-Yes, you can fork this repo. Please give me proper credit by linking back to [brittanychiang.com](https://brittanychiang.com). Thanks!
-
-## 🛠 Installation & Set Up
+## Installation and set up
 
 1. Install the Gatsby CLI
 
@@ -59,7 +34,7 @@ Yes, you can fork this repo. Please give me proper credit by linking back to [br
    npm start
    ```
 
-## 🚀 Building and Running for Production
+## Building and running for production
 
 1. Generate a full static production build
 
@@ -67,21 +42,51 @@ Yes, you can fork this repo. Please give me proper credit by linking back to [br
    npm run build
    ```
 
-1. Preview the site as it will appear once deployed
+2. Preview the site as it will appear once deployed
 
    ```sh
    npm run serve
    ```
 
-## 🎨 Color Reference
+## Writing blog posts
 
-| Color          | Hex                                                                |
-| -------------- | ------------------------------------------------------------------ |
-| Navy           | ![#0a192f](https://via.placeholder.com/10/0a192f?text=+) `#0a192f` |
-| Light Navy     | ![#112240](https://via.placeholder.com/10/0a192f?text=+) `#112240` |
-| Lightest Navy  | ![#233554](https://via.placeholder.com/10/303C55?text=+) `#233554` |
-| Slate          | ![#8892b0](https://via.placeholder.com/10/8892b0?text=+) `#8892b0` |
-| Light Slate    | ![#a8b2d1](https://via.placeholder.com/10/a8b2d1?text=+) `#a8b2d1` |
-| Lightest Slate | ![#ccd6f6](https://via.placeholder.com/10/ccd6f6?text=+) `#ccd6f6` |
-| White          | ![#e6f1ff](https://via.placeholder.com/10/e6f1ff?text=+) `#e6f1ff` |
-| Green          | ![#64ffda](https://via.placeholder.com/10/64ffda?text=+) `#64ffda` |
+Posts live in `content/posts/`. The number at the start of the file name sets the order of the posts and the previous and next links, so use two digits:
+
+```
+content/posts/
+├── 00-first-post.md
+├── 01-second-post.md
+└── 02-third-post.md
+```
+
+Each post starts with this frontmatter:
+
+```md
+---
+title: 'Post title'
+description: 'One-sentence summary'
+slug: '/blog/post-slug'
+date: '2026-10-06'
+tags: ['Tag one', 'Tag two']
+draft: false
+---
+```
+
+Set `draft: true` to hide a post.
+
+## Color reference
+
+| Color          | Hex       |
+| -------------- | --------- |
+| Navy           | `#0a192f` |
+| Light Navy     | `#112240` |
+| Lightest Navy  | `#233554` |
+| Slate          | `#8892b0` |
+| Light Slate    | `#a8b2d1` |
+| Lightest Slate | `#ccd6f6` |
+| White          | `#e6f1ff` |
+| Green          | `#64ffda` |
+
+## License
+
+This project keeps the license of the original repository. See the [LICENSE](LICENSE) file.
