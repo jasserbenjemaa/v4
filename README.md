@@ -4,7 +4,7 @@ My personal portfolio and blog, built with [Gatsby](https://www.gatsbyjs.org/) a
 
 ## Credits
 
-This site is a fork of [brittanychiang.com (v4)](https://github.com/bchiang7/v4) by [Brittany Chiang](https://brittanychiang.com). The original design and code are hers. I customized the content and added my own changes, including a blog with previous and next post navigation.
+This site is a fork of [brittanychiang.com (v4)](https://github.com/bchiang7/v4) by [Brittany Chiang](https://brittanychiang.com). The original design and code are hers. I customized the content and added my own changes.
 
 Thank you, Brittany, for keeping your site open source. If you want to use her work for your own site, please give her proper credit by linking back to [brittanychiang.com](https://brittanychiang.com).
 
