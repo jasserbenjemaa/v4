@@ -15,12 +15,16 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const result = await graphql(`
     {
       postsRemark: allMarkdownRemark(
-        filter: { fileAbsolutePath: { regex: "/content/posts/" } }
-        sort: { order: DESC, fields: [frontmatter___date] }
+        filter: {
+          fileAbsolutePath: { regex: "/content/posts/" }
+          frontmatter: { draft: { ne: true } }
+        }
+        sort: { order: ASC, fields: [fileAbsolutePath] }
         limit: 1000
       ) {
         edges {
           node {
+            id
             frontmatter {
               slug
             }
@@ -44,11 +48,19 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   // Create post detail pages
   const posts = result.data.postsRemark.edges;
 
-  posts.forEach(({ node }) => {
+  // Posts are sorted by file name (00-..., 01-..., 02-...), so the number in the
+  // file name decides the index. "next" is index + 1, "previous" is index - 1.
+  posts.forEach(({ node }, index) => {
+    const previous = index > 0 ? posts[index - 1].node : null;
+    const next = index < posts.length - 1 ? posts[index + 1].node : null;
+
     createPage({
       path: node.frontmatter.slug,
       component: postTemplate,
-      context: {},
+      context: {
+        previousPostId: previous ? previous.id : null,
+        nextPostId: next ? next.id : null,
+      },
     });
   });
 

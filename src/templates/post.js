@@ -49,9 +49,47 @@ const StyledPostContent = styled.div`
     padding: 0;
   }
 `;
+const StyledPostNav = styled.nav`
+  ${({ theme }) => theme.mixins.flexBetween};
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 100px;
+  padding-top: 30px;
+  border-top: 1px solid var(--lightest-navy);
+
+  a {
+    display: flex;
+    flex-direction: column;
+    max-width: 48%;
+
+    &.next {
+      margin-left: auto;
+      text-align: right;
+    }
+
+    .label {
+      color: var(--green);
+      font-family: var(--font-mono);
+      font-size: var(--fz-xs);
+    }
+
+    .title {
+      color: var(--lightest-slate);
+      font-size: var(--fz-lg);
+    }
+
+    &:hover,
+    &:focus-visible {
+      .title {
+        color: var(--green);
+      }
+    }
+  }
+`;
 
 const PostTemplate = ({ data, location }) => {
   const { frontmatter, html } = data.markdownRemark;
+  const { previous, next } = data;
   const { title, date, tags } = frontmatter;
 
   return (
@@ -86,6 +124,24 @@ const PostTemplate = ({ data, location }) => {
         </StyledPostHeader>
 
         <StyledPostContent dangerouslySetInnerHTML={{ __html: html }} />
+
+        {(previous || next) && (
+          <StyledPostNav aria-label="Blog navigation">
+            {previous && (
+              <Link to={previous.frontmatter.slug} rel="prev">
+                <span className="label">&larr; Previous</span>
+                <span className="title">{previous.frontmatter.title}</span>
+              </Link>
+            )}
+
+            {next && (
+              <Link to={next.frontmatter.slug} rel="next" className="next">
+                <span className="label">Next &rarr;</span>
+                <span className="title">{next.frontmatter.title}</span>
+              </Link>
+            )}
+          </StyledPostNav>
+        )}
       </StyledPostContainer>
     </Layout>
   );
@@ -99,7 +155,7 @@ PostTemplate.propTypes = {
 };
 
 export const pageQuery = graphql`
-  query($path: String!) {
+  query($path: String!, $previousPostId: String, $nextPostId: String) {
     markdownRemark(frontmatter: { slug: { eq: $path } }) {
       html
       frontmatter {
@@ -108,6 +164,18 @@ export const pageQuery = graphql`
         date
         slug
         tags
+      }
+    }
+    previous: markdownRemark(id: { eq: $previousPostId }) {
+      frontmatter {
+        title
+        slug
+      }
+    }
+    next: markdownRemark(id: { eq: $nextPostId }) {
+      frontmatter {
+        title
+        slug
       }
     }
   }
