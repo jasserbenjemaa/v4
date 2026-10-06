@@ -10,6 +10,7 @@ draft: false
 In this post I'm sharing my personal journey toward becoming an AI engineer. I looked at a lot of roadmaps online, and in the end I built my own. I skipped several of the standard introductory topics because I already covered them at university.
 
 My roadmap has three phases.
+![road map image](./roadmap.png)
 
 ## Phase 1: Foundations, Transformers and LLMs
 
