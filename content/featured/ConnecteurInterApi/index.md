@@ -1,5 +1,5 @@
 ---
-date: '3'
+date: '2'
 title: 'Connecteur inter-API'
 cover: './demo.png'
 github: 'https://github.com/jasserbenjemaa/flask_proxy'
